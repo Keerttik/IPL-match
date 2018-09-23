@@ -1,5 +1,3 @@
-
-
 public class TeamForSort implements Comparable<TeamForSort> {
     private String name;
     private int score;

@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class Matchs {
@@ -34,8 +33,8 @@ public class Matchs {
 
     }
 
-    public boolean inningExists(int inning) {
-        return numberInningMap.containsKey(inning);
+    public boolean inningsExists(int inningss) {
+        return numberInningMap.containsKey(inningss);
     }
 
     public String getDate() {
@@ -50,46 +49,9 @@ public class Matchs {
         return numberInningMap;
     }
 
-    public Innings getInning(int inning) {
-        return numberInningMap.get(inning);
+    public Innings getInning(int innings) {
+        return numberInningMap.get(innings);
     }
-//    public void dateAssign(String date) throws DateFormatException {
-//        String[] dateArray = date.split(".");
-//        if (dateArray.length != 3) throw new DateFormatException();
-//
-//        try {
-//            int day = Integer.parseInt(dateArray[0]);
-//            int month = Integer.parseInt(dateArray[1]);
-//            int year = Integer.parseInt(dateArray[2]);
-//
-//
-//            if (!isDateValid(year, month, day)) throw new Exception();
-//
-//            this.date[0] = day;
-//            this.date[1] = month;
-//            this.date[2] = year;
-//
-//        } catch (Exception num) {
-//            throw new DateFormatException();
-//        }
-
-//
-//    }
-//
-//    private boolean isDateValid(int year, int month, int day) {
-//
-//        boolean valid = true;
-//        Calendar calendar = new GregorianCalendar(year, month, day);
-//        if (year != calendar.get(Calendar.YEAR)) {
-//            valid = false;
-//        } else if (month != calendar.get(Calendar.MONTH)) {
-//            valid = false;
-//        } else if (day != calendar.get(Calendar.DAY_OF_MONTH)) {
-//            valid = false;
-//        }
-//        return valid;
-//    }
-
     public String getFirstTeam() {
         return firstTeam;
     }
@@ -122,17 +84,17 @@ public class Matchs {
         return matchID;
     }
 
-    public void addInning(Innings inning) {
-        numberInningMap.put(inning.getNumber(), inning);
+    public void addInning(Innings innings) {
+        numberInningMap.put(innings.getNumber(), innings);
     }
 
-    public boolean doesNotContainInning(int inning) {
-        return !numberInningMap.containsKey(inning);
+    public boolean doesNotContainInning(int innings) {
+        return !numberInningMap.containsKey(innings);
     }
 
     public boolean hasBowler(String bowler) {
-        for (Innings inning : getInningsMap().values()) {
-            if (inning.hasBowler(bowler)) return true;
+        for (Innings innings : getInningsMap().values()) {
+            if (innings.hasBowler(bowler)) return true;
         }
         return false;
     }
@@ -140,8 +102,8 @@ public class Matchs {
     public int getNumberOfBallsBowledByBowler(String bowler) {
         if (!hasBowler(bowler)) return 0;
         int totalBalls = 0;
-        for (Innings inning : getInningsMap().values()) {
-            totalBalls += inning.getNumberOfBallsBowledByBowler(bowler);
+        for (Innings innings : getInningsMap().values()) {
+            totalBalls += innings.getNumberOfBallsBowledByBowler(bowler);
         }
 
         return totalBalls;
@@ -149,25 +111,25 @@ public class Matchs {
 
     public List<String> getBowlersList() {
         Set<String> uniqueBowlers = new HashSet<>();
-        for (Innings inning : getInningsMap().values()) {
-            uniqueBowlers.addAll(inning.getBowlersList());
+        for (Innings innings : getInningsMap().values()) {
+            uniqueBowlers.addAll(innings.getBowlersList());
         }
 
         List<String> bowlers = new ArrayList<>(uniqueBowlers);
         return bowlers;
     }
 
-    public int getTotalRunsByBowlerForRunType(String bowler, Score type) {
+    public int getTotalRunsByBowlerForScore(String bowler, Score type) {
 
         if (!hasBowler(bowler)) return 0;
-        int totalRunsByBowlerOfRunType = 0;
+        int totalRunsByBowlerOfScore = 0;
 
-        for (Innings inning : getInningsMap().values()) {
+        for (Innings innings : getInningsMap().values()) {
 
-            totalRunsByBowlerOfRunType += inning.getTotalRunsByBowlerForRunType(bowler, type);
+            totalRunsByBowlerOfScore += innings.getTotalRunsByBowlerForScore(bowler, type);
         }
 
-        return totalRunsByBowlerOfRunType;
+        return totalRunsByBowlerOfScore;
     }
 
     public String getBattingFirstTeam() {

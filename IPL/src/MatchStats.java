@@ -17,16 +17,15 @@ public class MatchStats{
 
         for (int id : idMatchMap.keySet()) {
 
-            Matchs match = idMatchMap.get(id);           //returns values associated with k
+            Matchs match = idMatchMap.get(id);           //returns values associated with key
 
-            And allConditionsHoldTrue = new And(new HasYear(match, year),
-                    new ValidMatch(match), new FieldFirst(match));
+            And allConditionsHoldTrue = new And(new HasYear(match, year),new ValidMatch(match), new FieldFirst(match));
 
             if (allConditionsHoldTrue.isValid()) {
                 String team = match.getTossWinner();
                 teamScoreMap.put(team, 0);
             }
-        }
+        } 
       
         Map<String, Integer> validTeamScoreMap = getValidTeamsScoreMap(teamScoreMap, year);
         PriorityQueue<TeamForSort> sortedTeams = getProperTreeStructure(validTeamScoreMap);
@@ -34,7 +33,7 @@ public class MatchStats{
       
         int count = sortedTeams.size() < top ? sortedTeams.size() : top;
 
-        System.out.format("Top %d teams in the year %d are :%n", count, year);
+        System.out.format("\n Top %d teams in the year %d are :%n  \n", count, year);
 
         while (!sortedTeams.isEmpty()) {
 
@@ -114,7 +113,7 @@ public class MatchStats{
                 Innings firstInning; 
                 Innings secondInning;
 
-                boolean secondInningExists = match.inningExists(2); 
+                boolean secondInningExists = match.inningsExists(2); 
 
                 firstInning = match.getInning(1);
                 secondInning = secondInningExists ? match.getInning(2) : null;
@@ -134,16 +133,14 @@ public class MatchStats{
        System.out.println(year + " " + team + "         " + fours + "        " + sixes + "       " + totalScore);
 
     }
+//Economy = (Total Runs Given/Overs bowled)
 
+    public void printTopBowlersInAllMatchYears(int top) {
 
-    public void printTopNBowlersInAllMatchYears(int top) {
-
-        // **MAJOR ASSUMPTION  : all player names are unique across all teams
-
-        // first get the years list
+      
         List<Integer> years = getYearsList();
         List<String> Bowlers = getBowlersList();
-        // for each Bowler do the following :
+      
         for (int year : years) {
 
             Map<String, Integer> BowlerRunsGivenMap = new HashMap<>();
@@ -176,7 +173,7 @@ public class MatchStats{
 
             for (int i = 0; i < limit; i++) {
                 BowlerForSort currentBowler = economyBowler.poll();
-                System.out.println(year + " " + currentBowler.getName() + " " + currentBowler.getScore());
+                System.out.println(year + "    " + currentBowler.getName() + "       " + currentBowler.getScore());
             }
             System.out.println("\n");
         }
@@ -186,7 +183,7 @@ public class MatchStats{
     private void updateRunsAndBowlsByBowler(
             int year, Map<String, Integer> BowlerRunsGivenMap,
             Map<String, Integer> BowlerBowlsBowledMap,
-            String Bowler,
+            String Bowler, 
             Matchs match) {
 
         if (hasYearAndHasBowlerInMatch(year, Bowler, match)) {
@@ -211,24 +208,17 @@ public class MatchStats{
     private void computeRunsByBowler(Map<String, Integer> BowlerRunsGivenMap, String Bowler, Matchs match) {
         if (!BowlerRunsGivenMap.containsKey(Bowler)) BowlerRunsGivenMap.put(Bowler, 0);
         int initialScore = BowlerRunsGivenMap.get(Bowler);
-        int matchTotalScoreByBowler = match.getTotalRunsByBowlerForRunType(Bowler, Score.TOTAL_RUNS);
-        int matchLegByeScoreByBowler = match.getTotalRunsByBowlerForRunType(Bowler, Score.LEGBYE_RUNS);
-        int matchByeScoreByBowler = match.getTotalRunsByBowlerForRunType(Bowler, Score.BYE_RUNS);
+        int matchTotalScoreByBowler = match.getTotalRunsByBowlerForScore(Bowler, Score.TOTAL_RUNS);
+        int matchLegByeScoreByBowler = match.getTotalRunsByBowlerForScore(Bowler, Score.LEGBYE_RUNS);
+        int matchByeScoreByBowler = match.getTotalRunsByBowlerForScore(Bowler, Score.BYE_RUNS);
         BowlerRunsGivenMap.put(Bowler, initialScore + (matchTotalScoreByBowler - (matchLegByeScoreByBowler + matchByeScoreByBowler)));
     }
 
 
-    private List<String> getBowlersOfTeam(Team team) {
-        List<String> Bowlers = new ArrayList<>();
-
-        return Bowlers;
-
-    }
-
     private List<String> getTeamsList() {
         List<String> teams = new ArrayList<>(getNameTeamMap().keySet());
         return teams;
-    }
+    } 
 
     public List<String> getBowlersList() {
         Set<String> uniqueBowlers = new HashSet<>();
@@ -242,7 +232,7 @@ public class MatchStats{
 
 
     public List<Integer> getYearsList() {
-        //latest year to least year
+      
         Set<Integer> yearSet = new TreeSet<>(Collections.reverseOrder());
         for (Matchs match : idMatchMap.values()) {
             yearSet.add(match.getYear());
@@ -253,13 +243,6 @@ public class MatchStats{
     }
 
 
-    private List<String> getTeamsWonTossFeilded() {
-        List<String> teams = new ArrayList<>();
-
-
-        return teams;
-    }
-
     public Map<Integer, Matchs> getIdMatchMap() {
         return idMatchMap;
     }
@@ -267,5 +250,24 @@ public class MatchStats{
     public Map<String, Team> getNameTeamMap() {
         return nameTeamMap;
     }
+
+    //Net Run Rate = (Total Runs Scored / Total Overs Faced) – (Total Runs
+    //Conceded /Total Overs Bowled)
+   /* 
+	public void printTeamHighestRunRate(int year, String team) {
+
+        int netRunRate= 0;
+        int totalScore = 0;
+        int oversFaced=0;
+        
+        for (Matchs match : getIdMatchMap().values()) {
+
+          
+        }
+
+       System.out.println(team + "         " + netRunRate );
+
+		
+	}*/
 
 }

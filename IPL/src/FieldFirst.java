@@ -1,5 +1,3 @@
-
-
 public class FieldFirst implements Validity {
 
     private Matchs match;

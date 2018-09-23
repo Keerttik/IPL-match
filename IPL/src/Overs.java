@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class Overs {
@@ -11,7 +10,7 @@ public class Overs {
         numberBallMap = new HashMap<>();
     }
 
-    public void addBall(balls ball) {
+    public void addBall(balls ball) {  
 
         numberBallMap.put(ball.getNumber(), ball);
     }
@@ -69,15 +68,15 @@ public class Overs {
         return totalBalls;
     }
 
-    public int getTotalRunsByBowlerForRunType(String bowler, Score type) {
+    public int getTotalRunsByBowlerForScore(String bowler, Score type) {
         if (!hasBowler(bowler)) return 0;
 
-        int totalRunsOfRunType = 0;
+        int totalRunsOfScore = 0;
         for (balls ball : numberBallMap.values()) {
-            totalRunsOfRunType += ball.getRunsOfType(type);
+            totalRunsOfScore += ball.getRunsOfType(type);
         }
 
-        return totalRunsOfRunType;
+        return totalRunsOfScore;
     }
 
 

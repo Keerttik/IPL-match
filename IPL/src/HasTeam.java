@@ -1,4 +1,3 @@
-
 public class HasTeam implements Validity{
     private String team;
     private Matchs match;

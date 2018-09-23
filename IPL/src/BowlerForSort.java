@@ -1,5 +1,3 @@
-
-
 public class BowlerForSort implements Comparable<BowlerForSort> {
     private double score;
     private String name;

@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 	public class EnterDeliveries {
@@ -24,12 +23,13 @@ import java.util.*;
 	            int over = Integer.parseInt(arr.get(4));
 	            int ball = Integer.parseInt(arr.get(5));
 	            String batsman = arr.get(6).trim();
-	            String Bowler = arr.get(7).trim();
+	            String bowler = arr.get(7).trim();
 
 	            int[] runTypesArrayForDelivery = getRunTypesArrayForDelivery(arr);
 
 
-	            processInning(matchID, inning, battingTeam, bowlingTeam, over, ball, batsman, Bowler, runTypesArrayForDelivery);
+	            processInning(matchID, inning, battingTeam, bowlingTeam, over, ball, 
+	            		batsman, bowler, runTypesArrayForDelivery);
 
 	        }
 
@@ -91,7 +91,8 @@ import java.util.*;
 	            int[] runs) {
 
 
-	        if (inning.doesNotContainOver(over)) addNewOver(over, inning);
+	        if (inning.doesNotContainOver(over))
+	        	addNewOver(over, inning);
 
 	        Overs myOver = inning.getOver(over);
 

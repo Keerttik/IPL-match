@@ -1,7 +1,3 @@
-
-
-
-
 import java.util.EnumMap;
 
 public final class balls {
@@ -40,9 +36,7 @@ public final class balls {
 
     @Override
     public String toString() {
-        return "Ball{" +
-                "runTypeScoreMap=" + runTypeScoreMap +
-                ", batsman='" + batsman + '\'' +
+        return "Ball{runTypeScoreMap=" + runTypeScoreMap + ", batsman='" + batsman + '\'' +
                 ", bowler='" + bowler + '\'' +
                 ", ball number=" + ballNumber +
                 '}';

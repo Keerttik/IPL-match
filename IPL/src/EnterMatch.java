@@ -8,7 +8,7 @@ public class EnterMatch {
 
 
 	    public EnterMatch(String fileName) {
-	        //Initialize using Hashmap
+	        
 	        idMatchMap = new HashMap<>();
 	        nameTeamMap = new HashMap<>();
 
@@ -52,12 +52,10 @@ public class EnterMatch {
 	    }
 
 	    private void addTeam(String teamName, int match_id) {
-	        // if team entry not present , create team
 	        if (!nameTeamMap.containsKey(teamName)) {
 	            Team tempTeam = new Team(teamName);
 	            nameTeamMap.put(teamName, tempTeam);
 	        }
-	        // add match_id
 	        Team team = nameTeamMap.get(teamName);
 	        team.addMatchID(match_id);
 	    }

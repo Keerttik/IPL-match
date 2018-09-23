@@ -1,5 +1,3 @@
-
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,6 +8,7 @@ public class FileParser {
     private List<List<String>> entriesList;
     private final String EOF = "-EOF-";
     private int expectedFileds;
+	private static final String COMMA_DELIMITER = ",";
 
     public FileParser(String fileName) {
         this.fileName = fileName;
@@ -18,7 +17,8 @@ public class FileParser {
     }
 
     private void processFile() {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(fileName)))) {
+        try (
+       	BufferedReader bufferedReader = new BufferedReader(new FileReader(new File(fileName)))) {
             boolean isFirstLine = true;
 
             String s = "";
@@ -27,7 +27,7 @@ public class FileParser {
 
                 String entry = getEntry(bufferedReader, s);
 
-                //skip the first line of the file
+                //skip the 1st line as they are headers
                 if (isFirstLine == true) {
                     isFirstLine = false;
                     this.expectedFileds = entry.split(",").length;
@@ -38,9 +38,21 @@ public class FileParser {
                 List<String> singleEntryList = getSingleEntryList(entry, expectedFileds);
 
 
-                entriesList.add(singleEntryList);
+                entriesList.add(singleEntryList);/*
 
-            }
+        		Scanner scanner = null;
+        		try {
+        			//Get the scanner instance
+        			scanner = new Scanner(new File(filename));
+        			//Use Delimiter as COMMA
+        			scanner.useDelimiter(COMMA_DELIMITER);
+        			while(scanner.hasNext())
+        			{
+        					System.out.print(scanner.next()+"   ");
+        			*/
+        		
+    
+    }
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -55,7 +67,7 @@ public class FileParser {
         return entriesList;
     }
 
-    private String getEntry(BufferedReader bufferedReader, String s) {
+    private String getEntry(BufferedReader bufferedReader, String s) {	//for reading the file
         try {
             if ((s = bufferedReader.readLine()) != null) {
 
@@ -63,7 +75,7 @@ public class FileParser {
                 s = EOF;
             }
         } catch (IOException e) {
-            System.out.println("Issue while processing single entry");
+            System.out.println("try again");
             e.printStackTrace();
         }
 
@@ -71,12 +83,12 @@ public class FileParser {
     }
 
     private static List<String> getSingleEntryList(String entry, int expectedFileds) {
-        String[] tokenisedEntry = entry.split(",");
+        String[] tokenisedEntry = entry.split(COMMA_DELIMITER);
         String[] processedList = Arrays.copyOf(tokenisedEntry, expectedFileds);
 
         List entryList = Arrays.asList(processedList);
 
-         System.out.println(entryList);
+      //   System.out.println(entryList); prints all file
 
         return entryList;
     }

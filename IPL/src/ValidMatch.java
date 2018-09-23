@@ -1,4 +1,3 @@
-
 public class ValidMatch implements Validity {
 
     private Matchs match;

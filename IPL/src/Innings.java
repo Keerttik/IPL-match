@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class Innings {
@@ -36,11 +35,13 @@ public class Innings {
     public Overs getOver(int over) {
         return numberOversMap.get(over);
     }
+    public Score getOverFaced(Score overs){
+    	return overs;
+    }
 
     @Override
     public String toString() {
-        return "Inning{" +
-                "numberOversMap=" + numberOversMap +
+        return "Inning{" + "numberOversMap=" + numberOversMap +
                 ", inning number=" + inningNumber +
                 ", battingTeam='" + battingTeam + '\'' +
                 ", bowlingTeam='" + bowlingTeam + '\'' +
@@ -81,16 +82,16 @@ public class Innings {
     }
 
 
-    public int getTotalRunsByBowlerForRunType(String bowler, Score type) {
+    public int getTotalRunsByBowlerForScore(String bowler, Score type) {
         if (!hasBowler(bowler)) return 0;
-        int totalRunsOfBowlerOfRunType = 0;
+        int totalRunsOfBowlerOfScore = 0;
 
         for (Overs over : getNumberOversMap().values()) {
 
-            totalRunsOfBowlerOfRunType += over.getTotalRunsByBowlerForRunType(bowler, type);
+            totalRunsOfBowlerOfScore += over.getTotalRunsByBowlerForScore(bowler, type);
         }
 
-        return totalRunsOfBowlerOfRunType;
+        return totalRunsOfBowlerOfScore;
     }
 
     public int getNumberOfBallsBowledByBowler(String bowler) {
@@ -106,8 +107,7 @@ public class Innings {
 
 
     public int getTotalFours() {
-        //assumption , if the BatsmanRuns is 4, then it is supposed that it's a 4 by a stroke , not by running between wickets
-        int fours = 0;
+       int fours = 0;
         for (Overs over : numberOversMap.values()) {
 
             fours += over.getTotalFours();
@@ -117,8 +117,7 @@ public class Innings {
 
 
     public int getTotalSixes() {
-        //assumption , if the BatsmanRuns is 6, then it is supposed that it's a 6 by a stroke , not by running between wickets
-        int sixes = 0;
+       int sixes = 0;
         for (Overs over : numberOversMap.values()) {
 
             sixes += over.getTotalSixes();
