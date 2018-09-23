@@ -15,7 +15,7 @@ public class Display{
 
         while (true) {
           
-        	System.out.println("\n\n ========FRAGMA DATA========= \n \n \n");
+        	System.out.println("\n\n ========IPL========= \n \n \n");
         	System.out.println("Enter Your Choice : \n " ) ;
             System.out.println( "1. Top 4 teams which elected to field first after winning "
             		+ "toss in the year 2016 and 2017.\n");            
