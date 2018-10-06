@@ -22,9 +22,8 @@ public class Display{
             System.out.println("2. Total number of fours, sixes, total score with respect to team and year.  \n ");
             System.out.println("3. Top 10 best economy rate bowler with respect to year who bowled "
             		+ "at least 10 overs\n");
-            System.out.println("4. The team name which has Highest Net Run Rate with respect to year.\n");
-
-            System.out.println("5. Exit");
+            
+            System.out.println("4. Exit");
  
             String entry = scanner.nextLine();
 
@@ -41,12 +40,7 @@ public class Display{
             	MatchStats.printTopBowlersInAllMatchYears(10);
                 System.out.println();
 
-            } else if (entry.equals("4")) {
-            	//MatchStats.printTeamHighestRunRate();
-                System.out.println();
-            }
-           
-            else if (entry.equals("5")) {
+            }   else if (entry.equals("4")) {
             	System.exit(0); 
                }
         }
